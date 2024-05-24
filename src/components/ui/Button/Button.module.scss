@@ -1,0 +1,34 @@
+.btn {
+    background: transparent;
+        border: 2px solid transparent;
+        text-align: center;
+        font-size: 22px;
+        border-radius: 15px;
+        padding: 10px 25px;
+        cursor: pointer;
+        margin: 0 10px;
+        transition: all 0.05s ease-in-out;
+    
+        &:hover {
+            transform: translateY(-3px);
+        }
+    
+        &:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+}
+
+.minus {
+    background-color: #ef5e6a;
+    color: #fff;
+    box-shadow: 0 4px 0 darken(#d2404c, 10%);
+    border: 1px solid darken(#d43946, 15%);
+}
+
+.plus {
+    background-color: #3c6bd8;
+    color: #fff;
+    box-shadow: 0 4px 0 darken(#1753e0, 10%);
+    border: 1px solid darken(#0546de, 15%);
+}

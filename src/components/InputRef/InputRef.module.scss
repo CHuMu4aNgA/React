@@ -1,0 +1,21 @@
+.input{
+    width: 120px;
+    padding: 5px 15px;
+    margin: 5px 0;
+    border: 2px solid rgb(35, 111, 225);
+    border-radius: 8px;
+    background-color: rgb(31, 37, 37);
+
+    &::placeholder{
+        color: #d5d5d5;
+    }
+
+    &:hover{
+        background-color: green;
+    }
+
+    &:focus{
+        border: 2px solid #4f32ab;
+        outline: none
+    }
+}
