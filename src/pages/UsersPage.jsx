@@ -2,7 +2,7 @@ import { UserList } from '../components/UserList/UserList'
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '../components/ui/Button/Button'
 import { Input } from '../components/ui/Input/Input'
-import { InputRef } from '../components/InputRef/InputRef'
+// import { InputRef } from '../components/InputRef/InputRef'
 
 
 
@@ -10,9 +10,11 @@ import { InputRef } from '../components/InputRef/InputRef'
 export const UsersPage = () => {
     const [visibleUserList, setVisibleUserList] = useState(true)
     const [users, setUsers] = useState([])
-    const [inputValue, setInputValue] = useState('')
-    const inputRef = useRef(null)
-    console.log(inputRef)
+    const [user, setUser] = useState({firstName: '', lastName: ''})
+    const [inputValueId, setInputValueId] = useState('')
+     
+    // const inputRef = useRef(null)
+
     useEffect(() => {
         fetch('https://dummyjson.com/users')
         .then(res => res.json())
@@ -30,29 +32,31 @@ export const UsersPage = () => {
     }
 
     const changeValue = (event) => {
-      setInputValue(event.target.value)
+      setInputValueId(event.target.value)
     }
     
     const addUser = () => {
       const newUser = {
         id: Math.round(Math.random() * 1000),
-        firstName: inputValue,
-        lastName: inputRef.current.value
+        firstName: user.firstName,
+        lastName: user.lastName
+        //lastName: inputRef.current.value
       }
-        if (!inputValue) {
-          return
-      }
+      //   if (!inputValue) {
+      //     return
+      // }
       setUsers([...users, newUser])
-      setInputValue('')
-      inputRef.current.value = ''
+      setUser({firstName: '', lastName: ''})
+      
+      //inputRef.current.value = ''
     }
     
       const removeUser = (id) => {
-        if (!inputValue) {
+        if (!inputValueId) {
           return
         }
         setUsers(users.filter(user => user.id !== id))
-        setInputValue('')
+        setInputValueId('')
     }
     
     const updateUser = (id) => {
@@ -77,14 +81,20 @@ export const UsersPage = () => {
             <Input
                 placeholder='Введите имя'
                 type="text"
-                value={inputValue}
-                onChange={changeValue}
+                value={user.firstName}
+                onChange={e => setUser({...user, firstName: e.target.value})}
             />
-            <InputRef
+            <Input 
+              placeholder='Введите фамилию'
+              type="text"
+              value={user.lastName}
+              onChange={e => setUser({...user, lastName: e.target.value})}
+            />
+            {/* <InputRef
                 ref={inputRef}
                 placeholder='Введите фамилию'
                 type="text"
-            />
+            /> */}
             <Button
                 btnClass='plus'
                 onClick={addUser}
@@ -93,7 +103,7 @@ export const UsersPage = () => {
             </Button>
             <Button
                 btnClass='minus'
-                onClick={() => removeUser(inputValue)}
+                onClick={() => removeUser(inputValueId)}
             >
             Удалить пользователя
             </Button>
